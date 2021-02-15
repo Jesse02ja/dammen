@@ -19,7 +19,7 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pass
 
-        bord.vierkant(scherm)
+        bord.bord_schijven(scherm)
         pygame.display.update()
 
     pygame.quit()

@@ -23,10 +23,10 @@ class Schijf:
         self.dam = True
     
     def bereken_pos(self):
-        self.x = self.kolom * blokgrootte + blokgrootte // 2
-        self.y = self.rij * blokgrootte + blokgrootte // 2
+        self.x = blokgrootte * self.kolom + blokgrootte // 2
+        self.y = blokgrootte * self.rij + blokgrootte // 2
     
-    def tekenen(self, kleur):
+    def tekenen(self, scherm):
         straal = blokgrootte // 2 - self.padding
         pygame.draw.circle(scherm, zwart, (self.x, self.y), straal + self.rand)
         pygame.draw.circle(scherm, self.kleur, (self.x, self.y), straal)
