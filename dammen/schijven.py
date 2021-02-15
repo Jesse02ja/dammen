@@ -18,6 +18,7 @@ class Schijf:
         
         self.x = 0
         self.y = 0
+        self.bereken_pos()
     
     def dam_worden(self):
         self.dam = True
