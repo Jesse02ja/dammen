@@ -6,8 +6,8 @@ class Bord:
     def __init__(self):
         self.bord = []
         self.gekozen_stuk = None
-        self.zwart_over = self.wit_over = 20
-        self.zwart_dam = self.wit_dam = 0
+        #self.zwart_over = self.wit_over = 20
+        #self.zwart_dam = self.wit_dam = 0
         self.schijven_plaatsen()
 
     def vierkant(self, scherm):
