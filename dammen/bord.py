@@ -2,6 +2,17 @@ import pygame
 from .constanten import grijs, wit, blokgrootte, rijen, zwart, kolommen
 from .schijven import Schijf
 
+
+def print_bord(bord):
+    for rijindex, rij in enumerate(bord):
+        print(rijindex, end=' ')
+        for kolomindex, kolom in enumerate(rij):
+            if not kolom:
+                print(' ', end='')
+            else:
+                print(kolom.kleur[0], end='')
+        print()
+
 class Bord:
     def __init__(self):
         self.bord = []
@@ -32,6 +43,7 @@ class Bord:
 
     def bord_schijven(self, scherm):
         self.vierkant(scherm)
+        print_bord(self.bord)
         for rij in range(rijen):
             for kolom in range(kolommen):
                 schijf = self.bord[rij][kolom]

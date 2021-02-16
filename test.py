@@ -1,15 +1,13 @@
 from dammen.bord import Bord
 
-bord = Bord()
 
-print(len(bord.bord))
-i = 0
-for rij in bord.bord:
-    for kolom in rij:
-        if i % 10 == 0:
-            print()
-        if not kolom:
-            print(' ', end='')
-        else:
-            print(kolom.kleur[0], end='')
-        i += 1
+
+def print_bord(bord):
+    for rijindex, rij in enumerate(bord.bord):
+        print(rijindex, end=' ')
+        for kolomindex, kolom in enumerate(rij):
+            if not kolom:
+                print(' ', end='')
+            else:
+                print(kolom.kleur[0], end='')
+        print()

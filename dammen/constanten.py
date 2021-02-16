@@ -1,8 +1,8 @@
 import pygame
 
-framerate = 60
-kolommen = 10
-rijen = 10
+framerate = 10
+kolommen = 9
+rijen = 9
 breedte = 800
 hoogte = 800
 blokgrootte = breedte // kolommen
