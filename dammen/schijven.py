@@ -1,5 +1,5 @@
 import pygame
-from .constanten import blokgrootte, wit, zwart
+from .constanten import blokgrootte, wit, zwart, kroon
 
 class Schijf:
     padding = 10
@@ -20,9 +20,6 @@ class Schijf:
         self.y = 0
         self.bereken_pos()
     
-    def dam_worden(self):
-        self.dam = True
-    
     def bereken_pos(self):
         self.x = blokgrootte * self.kolom + blokgrootte // 2
         self.y = blokgrootte * self.rij + blokgrootte // 2
@@ -31,6 +28,16 @@ class Schijf:
         straal = blokgrootte // 2 - self.padding
         pygame.draw.circle(scherm, zwart, (self.x, self.y), straal + self.rand)
         pygame.draw.circle(scherm, self.kleur, (self.x, self.y), straal)
+        if self.dam:
+            scherm.blit(kroon, (self.x - kroon.get_width() // 2, self.y - kroon.get_height() // 2))
+
+    def dam_worden(self):
+        self.dam = True
     
+    def zet(self, rij, kolom):
+        self.rij = rij
+        self.kolom = kolom
+        self.bereken_pos()
+
     def __rep__(self):
         return str(self.kleur)

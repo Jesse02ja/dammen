@@ -1,6 +1,8 @@
+from test import print_bord
 import pygame
-from dammen.constanten import breedte, hoogte, framerate
+from dammen.constanten import breedte, hoogte, framerate, blokgrootte
 from dammen.bord import Bord
+from dammen.spel import Spel
 
 scherm = pygame.display.set_mode((breedte, hoogte))
 pygame.display.set_caption('Dammen')
@@ -9,6 +11,8 @@ def main():
     run = True
     klok = pygame.time.Clock()
     bord = Bord()
+    spel = Spel(scherm)
+    
     while run:
         klok.tick(framerate)
         
@@ -17,10 +21,18 @@ def main():
                 run = False
             
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                positie = pygame.mouse.get_pos()
+                rij, kolom = muispositie(positie)
 
-        bord.bord_schijven(scherm)
-        pygame.display.update()
+
+        spel.update()
 
     pygame.quit()
+
+def muispositie(positie):
+    x, y = positie
+    kolom = x // blokgrootte
+    rij = y // blokgrootte
+    return rij, kolom
+
 main()
