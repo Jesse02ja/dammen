@@ -1,6 +1,6 @@
 import pygame
 
-kroon = pygame.transform.scale(pygame.image.load('dammen/assets/kroon.png'), (40, 30))
+kroon = pygame.transform.scale(pygame.image.load('dammen/plaatje/kroon.png'), (40, 30))
 
 framerate = 10
 kolommen = 10

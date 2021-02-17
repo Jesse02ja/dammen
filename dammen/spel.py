@@ -4,21 +4,28 @@ from .bord import Bord
 
 class Spel:
     def __init__(self, scherm):
-        self._init()
+        self._start()
         self.scherm = scherm
 
-    def _init(self):
+    def _start(self):
         self.gekozen = None
         self.bord = Bord()
         self.beurt = wit
-        self.zetten = {}
+        self.mogelijke_zetten = {}
     
     def update(self):
         self.bord.bord_schijven(self.scherm)
         pygame.display.update()
 
     def reset(self):
-        self._init()
+        self._start()
+
+    def beurtverandering(self):
+        self.mogelijke_zetten = {}
+        if self.beurt == wit:
+            self.beurt = zwart
+        else:
+            self.beurt = wit
     
     def kiezen(self, rij, kolom):
         if self.gekozen:
@@ -28,25 +35,19 @@ class Spel:
                 self.kiezen(rij, kolom)
         else:
             schijf = self.bord.maak_schijf(rij, kolom)
-            if schijf != 0 and schijf.kleur == self.turn:
+            if schijf != 0 and schijf.kleur == self.beurt:
                 self.gekozen = schijf
-                self.zetten = self.bord.geef_zetten(schijf)
+                self.mogelijke_zetten = self.bord.geef_mogelijke_zetten(schijf)
                 return True
-                
             return False
 
     def _zet(self, rij, kolom):
         schijf = self.bord.maak_schijf(rij, kolom)
-        if self.gekozen and schijf == 0 and (rij, kolom) in self.zetten:
+        if self.gekozen and schijf == 0 and (rij, kolom) in self.mogelijke_zetten():
             self.bord.zet(self.gekozen, rij, kolom)
         else:
             return False
-
         return True
 
-    def beurtverandering(self):
-        self.zetten = {}
-        if self.beurt == wit:
-            self.beurt = zwart
-        else:
-            self.beurt = wit
+
+

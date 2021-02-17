@@ -6,15 +6,15 @@ class Schijf:
     rand = 2
 
     def __init__(self, rij, kolom, kleur):
-        self.dam = False
+        self.dam = True
         self.rij = rij
         self.kolom = kolom
         self.kleur = kleur
 
-        if self.kleur == wit:
-            self.richting = 1
-        else:
-            self.richting = -1
+#        if self.kleur == wit:
+#            self.richting = 1
+#        else:
+#            self.richting = -1
         
         self.x = 0
         self.y = 0

@@ -63,3 +63,13 @@ class Bord:
 
     def maak_schijf(self, rij, kolom):
         return self.bord[rij][kolom]
+
+    def geef_mogelijke_zetten(self, schijf):
+#        links = schijf.kolom - 1
+#        rechts = schijf.kolom + 1
+#        rij = schijf.rij
+#        zetten = {}
+        if schijf.dam or schijf.color == wit:
+            pass
+        if schijf.dam or schijf.color == zwart:
+            pass
