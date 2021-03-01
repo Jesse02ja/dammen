@@ -1,5 +1,5 @@
 import pygame
-from .constanten import zwart, wit
+from .constanten import zwart, wit, lichtgrijs, blokgrootte
 from .bord import Bord
 
 class Spel:
@@ -48,6 +48,11 @@ class Spel:
         else:
             return False
         return True
+    
+    def teken_mogelijke_zetten(self, zetten):
+        for zet in zetten:
+            rij, kolom = zet
+            pygame.draw.circle(self.scherm, lichtgrijs, (kolom * blokgrootte + blokgrootte//2, rij * blokgrootte + blokgrootte//2), 15)
 
 
 

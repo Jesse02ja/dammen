@@ -6,7 +6,7 @@ class Schijf:
     rand = 2
 
     def __init__(self, rij, kolom, kleur):
-        self.dam = True
+        self.dam = False
         self.rij = rij
         self.kolom = kolom
         self.kleur = kleur
