@@ -55,10 +55,10 @@ class Bord:
         self.bord[schijf.rij][schijf.kolom], self.bord[rij][kolom] = self.bord[rij][kolom], self.bord[schijf.rij][schijf.kolom]
         schijf.zet(rij, kolom)
         if rij == 0 and schijf.kleur == wit:
-            schijf.dam_worden(self)
+            schijf.dam_worden()
             self.dam_wit += 1
         if rij == rijen - 1 and schijf.kleur == zwart:
-            schijf.dam_worden(self)
+            schijf.dam_worden()
             self.dam_zwart += 1
 
     def maak_schijf(self, rij, kolom):
@@ -69,22 +69,22 @@ class Bord:
         rechts = schijf.kolom + 1
         rij = schijf.rij
         zetten = {}
-        if schijf.dam or schijf.color == wit:
+        if schijf.dam or schijf.kleur == wit:
             zetten.update(self.links_gaan(rij -1, max(rij -3, -1), -1, schijf.kleur, links))
             zetten.update(self.rechts_gaan(rij -1, max(rij -3, -1), -1, schijf.kleur, rechts))
-        if schijf.dam or schijf.color == zwart:
-            zetten.update(self.links_gaan(rij +1, max(rij +3, rijen), 1, schijf.kleur, links))
-            zetten.update(self.rechts_gaan(rij +1, max(rij +3, rijen), 1, schijf.kleur, rechts))
+        if schijf.dam or schijf.kleur == zwart:
+            zetten.update(self.links_gaan(rij +1, min(rij +3, rijen), 1, schijf.kleur, links))
+            zetten.update(self.rechts_gaan(rij +1, min(rij +3, rijen), 1, schijf.kleur, rechts))
         return zetten
 
 
     def rechts_gaan(self, start, stop, stap, kleur, rechts, overgeslagen = []):
         zetten = {}
         last = []
-        for rij in range(start, stop, stap):
+        for r in range(start, stop, stap):
             if rechts >= kolommen:
                 break
-            huidige = self.bord.[r][rechts]
+            huidige = self.bord[r][rechts]
             if huidige == 0:
                 if not last and overgeslagen:
                     break
@@ -99,18 +99,18 @@ class Bord:
                         rij = min(r +3, 0)
                     zetten.update(self.links_gaan(r+stap, rij, stap, kleur, rechts - 1, overgeslagen = last))
                     zetten.update(self.rechts_gaan(r+stap, rij, stap, kleur, rechts + 1, overgeslagen = last))
-                    break
+                break
             elif huidige.kleur == kleur:
                 break
             else:
                 last = [huidige]
             rechts += 1
-        return = zetten
+        return zetten
 
     def links_gaan(self, start, stop, stap, kleur, links, overgeslagen = []):
         zetten = {}
         last = []
-        for rij in range(start, stop, stap):
+        for r in range(start, stop, stap):
             if links < 0:
                 break
             huidige = self.bord[r][links]
@@ -128,10 +128,25 @@ class Bord:
                         rij = min(r +3, 0)
                     zetten.update(self.links_gaan(r+stap, rij, stap, kleur, links - 1, overgeslagen = last))
                     zetten.update(self.rechts_gaan(r+stap, rij, stap, kleur, links + 1, overgeslagen = last))
-                    break
+                break
             elif huidige.kleur == kleur:
                 break
             else:
                 last = [huidige]
             links -= 1
         return zetten
+
+    def verwijder(self, schijven):
+        for schijf in schijven:
+            self.bord[schijf.rij][schijf.kolom] = 0
+            if schijf != 0:
+                if schijf.kleur == wit:
+                    self.schijf_wit -= 1
+                else:
+                    self.schijf_zwart -= 1
+    def winnaar(self):
+        if self.schijf_zwart <= 0:
+            return wit
+        elif self.schijf_wit <= 0:
+            return zwart
+        return False

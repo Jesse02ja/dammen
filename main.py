@@ -1,6 +1,6 @@
 from test import print_bord
 import pygame
-from dammen.constanten import breedte, hoogte, framerate, blokgrootte
+from dammen.constanten import breedte, hoogte, framerate, blokgrootte, wit
 from dammen.bord import Bord
 from dammen.spel import Spel
 
@@ -16,6 +16,9 @@ def main():
     while run:
         klok.tick(framerate)
         
+        if bord.winnaar() != False:
+            print(bord.winnaar())
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -23,6 +26,8 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 positie = pygame.mouse.get_pos()
                 rij, kolom = muispositie(positie)
+                #if spel.beurt == wit:
+                spel.kiezen(rij, kolom)   
 
 
         spel.update()
