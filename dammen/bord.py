@@ -69,12 +69,17 @@ class Bord:
         rechts = schijf.kolom + 1
         rij = schijf.rij
         zetten = {}
-        if schijf.dam or schijf.kleur == wit:
+        if schijf.kleur == wit:
             zetten.update(self.links_gaan(rij -1, max(rij -3, -1), -1, schijf.kleur, links))
             zetten.update(self.rechts_gaan(rij -1, max(rij -3, -1), -1, schijf.kleur, rechts))
-        if schijf.dam or schijf.kleur == zwart:
+        elif schijf.kleur == zwart:
             zetten.update(self.links_gaan(rij +1, min(rij +3, rijen), 1, schijf.kleur, links))
             zetten.update(self.rechts_gaan(rij +1, min(rij +3, rijen), 1, schijf.kleur, rechts))
+        elif schijf.dam:
+            zetten.update(self.links_gaan(rij -1, 0, -1, schijf.kleur, links))
+            zetten.update(self.rechts_gaan(rij -1, 0, -1, schijf.kleur, rechts))
+            zetten.update(self.links_gaan(rij +1, rijen, 1, schijf.kleur, links))
+            zetten.update(self.rechts_gaan(rij +1, rijen, 1, schijf.kleur, rechts))
         return zetten
 
 
@@ -144,6 +149,7 @@ class Bord:
                     self.schijf_wit -= 1
                 else:
                     self.schijf_zwart -= 1
+
     def winnaar(self):
         if self.schijf_zwart <= 0:
             return wit
