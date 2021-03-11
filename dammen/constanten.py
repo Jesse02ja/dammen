@@ -9,7 +9,7 @@ breedte = 800
 hoogte = 800
 blokgrootte = breedte // kolommen
 
-grijs = (80,80,80)
+grijs = (80,140,80)
 wit = (255,255,255)
 zwart = (0,0,0)
 lichtgrijs = (180,180,180)
